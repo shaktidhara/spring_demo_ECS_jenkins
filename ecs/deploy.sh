@@ -28,5 +28,5 @@ if [ ${DESIRED_COUNT} = "0" ]; then
     DESIRED_COUNT="1"
 fi
 
-# push the new task to the service itself
+# Push the new task to the service itself
 aws ecs update-service --cluster $CLUSTER --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION} --desired-count ${DESIRED_COUNT} --region 'us-east-1'
