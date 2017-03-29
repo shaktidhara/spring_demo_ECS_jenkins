@@ -25,7 +25,7 @@ TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY -
 DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} --region 'us-east-1' | jq .services[0].desiredCount`
 
 if [ ${DESIRED_COUNT} = "0" ]; then
-    DESIRED_COUNT="1"
+    DESIRED_COUNT="2"
 fi
 
 # Push the new task to the service itself
