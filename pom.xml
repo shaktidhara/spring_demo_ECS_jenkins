@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.platform</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>spring_demo</artifactId>
 	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
@@ -50,7 +50,7 @@
 	</dependencies>
 
 	<build>
-    <finalName>${project.artifactId}</finalName>
+    		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
