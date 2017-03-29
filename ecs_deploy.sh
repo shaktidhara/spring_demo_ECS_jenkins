@@ -13,8 +13,8 @@ sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ecs/$TASK_FAMILY.json > $TASK_FAMILY
 aws ecs register-task-definition --family $TASK_FAMILY --cli-input-json file://$TASK_FAMILY-v_${BUILD_NUMBER}.json
 
 # Update the service with the new task definition and desired count
-TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
-DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
+TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY | jq .taskDefinition.revision`
+DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | jq .services[0].desiredCount`
 
 echo "!!!! - DESIRED_COUNT = $DESIRED_COUNT" # delete me
 
