@@ -23,8 +23,6 @@ fi
 TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY --region 'us-east-1' | jq .taskDefinition.revision`
 DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} --region 'us-east-1' | jq .services[0].desiredCount`
 
-echo "!!!! - DESIRED_COUNT = $DESIRED_COUNT" # delete me
-
 if [ ${DESIRED_COUNT} = "0" ]; then
     DESIRED_COUNT="1"
 fi
