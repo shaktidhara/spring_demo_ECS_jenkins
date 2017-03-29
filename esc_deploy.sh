@@ -1,6 +1,8 @@
 #!/bin/bash
 
 BUILD_NUMBER=$1
+echo "Deploying build number $BUILD_NUMBER"
+
 SERVICE_NAME="flask-signup-service"
 IMAGE_VERSION="v_"${BUILD_NUMBER}
 TASK_FAMILY="flask-signup"
