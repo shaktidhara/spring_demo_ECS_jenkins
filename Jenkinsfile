@@ -17,5 +17,5 @@ node {
   }
 
   stage 'Deploy'
-  sh "./ecs_deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
+  sh "./ecs/deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
 }

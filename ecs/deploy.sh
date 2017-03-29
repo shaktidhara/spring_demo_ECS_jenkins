@@ -15,7 +15,8 @@ echo "Deploying build number $BUILD_NUMBER for service $SERVICE_NAME"
 sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ecs/$TASK_FAMILY.json > $TASK_FAMILY-v_${BUILD_NUMBER}.json
 aws ecs register-task-definition --family $TASK_FAMILY --region 'us-east-1' --cli-input-json file://$TASK_FAMILY-v_${BUILD_NUMBER}.json
 
-if [[ `aws ecs describe-services --region 'us-east-1' --services $SERVICE_NAME | jq .failures[0]` ]]; then
+# Create the service if it doesn't already exist
+if aws ecs describe-services --region 'us-east-1' --services $SERVICE_NAME | jq -e .failures[0]; then
   aws ecs create-service --cluster $CLUSTER --region 'us-east-1' --service-name $SERVICE_NAME --task-definition $TASK_FAMILY --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT --role $ECS_SERVICE_ROLE --desired-count 0
 fi
 
@@ -27,4 +28,5 @@ if [ ${DESIRED_COUNT} = "0" ]; then
     DESIRED_COUNT="1"
 fi
 
+# Push the new task to the service itself
 aws ecs update-service --cluster $CLUSTER --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION} --desired-count ${DESIRED_COUNT} --region 'us-east-1'
