@@ -1,6 +1,5 @@
 node {
-  println env.getEnvironment()
-
+  println "env.GIT_BRANCH = ${env.GIT_BRANCH}"
 
   stage 'Checkout'
   git 'https://github.com/uken/spring_demo.git'
