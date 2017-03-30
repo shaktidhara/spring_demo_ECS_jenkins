@@ -21,7 +21,7 @@ if aws ecs describe-services --region 'us-east-1' --cluser $CLUSTER --services $
 fi
 
 # Update the service with the new task definition and desired count
-TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY --region 'us-east-1' --cluster $CLUSTER | jq .taskDefinition.revision`
+TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY --region 'us-east-1' | jq .taskDefinition.revision`
 DESIRED_COUNT=`aws ecs describe-services --cluster $CLUSTER --services ${SERVICE_NAME} --region 'us-east-1' | jq .services[0].desiredCount`
 
 if [ ${DESIRED_COUNT} = "0" ]; then
