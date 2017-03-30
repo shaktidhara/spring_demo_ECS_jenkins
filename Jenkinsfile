@@ -1,5 +1,5 @@
 node {
-  branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print $2}'").trim()
+  branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
   println "branch = ${branch}"
 
   stage 'Checkout'
