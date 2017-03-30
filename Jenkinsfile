@@ -5,7 +5,7 @@ node {
   stage 'Tests'
   sh "./mvnw verify"
 
-  if (env.BRANCH_NAME == 'master') {
+  if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'production') {
     stage 'Maven build'
     sh "./mvnw clean package -Dmaven.test.skip=true"
 
@@ -17,7 +17,9 @@ node {
       docker.image('spring_demo').push('v_' + currentBuild.number)
     }
 
-    stage 'Deploy'
-    sh "./ecs/deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
+    if (env.BRANCH_NAME == 'master') {
+      stage 'Deploy'
+      sh "./ecs/deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
+    }
   }
 }
