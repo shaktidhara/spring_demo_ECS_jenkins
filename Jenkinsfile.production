@@ -51,7 +51,7 @@ node {
 
   stage('Git Tag') {
     sh("""
-      git tag -a ${app_version}
+      git tag -a ${app_version} -m 'add tag for production release version ${app_version}'
       git push --tags
     """)
   }
