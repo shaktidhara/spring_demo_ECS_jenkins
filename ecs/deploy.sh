@@ -9,7 +9,7 @@ ECS_SERVICE_ROLE=$6
 CLUSTER=${7:-default}
 IMAGE_VERSION="v_"${BUILD_NUMBER}
 
-echo "Deploying build number $BUILD_NUMBER for service $SERVICE_NAME"
+echo "Deploying build number $BUILD_NUMBER for service '$SERVICE_NAME'"
 
 # Create a new task definition for this build
 sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ecs/$TASK_FAMILY.json > $TASK_FAMILY-v_${BUILD_NUMBER}.json
@@ -17,6 +17,7 @@ aws ecs register-task-definition --family $TASK_FAMILY --region 'us-east-1' --cl
 
 # Create the service if it doesn't already exist
 if aws ecs describe-services --region 'us-east-1' --services $SERVICE_NAME | jq -e .failures[0]; then
+  echo "aws ecs create-service --cluster $CLUSTER --region 'us-east-1' --service-name $SERVICE_NAME --task-definition $TASK_FAMILY --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT --role $ECS_SERVICE_ROLE --desired-count 0"
   aws ecs create-service --cluster $CLUSTER --region 'us-east-1' --service-name $SERVICE_NAME --task-definition $TASK_FAMILY --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT --role $ECS_SERVICE_ROLE --desired-count 0
 fi
 

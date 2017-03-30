@@ -9,7 +9,7 @@ node {
     sh "./mvnw verify"
   }
 
-  if (branch == 'master' || branch == 'production') {
+  if (branch == 'master') {
     stage('Maven build') {
       sh "./mvnw clean package -Dmaven.test.skip=true"
     }
@@ -24,10 +24,8 @@ node {
       }
     }
 
-    if (branch == 'master') {
-      stage('Deploy Staging') {
-        sh "./ecs/deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
-      }
+    stage('Deploy Staging') {
+      sh "./ecs/deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
     }
   }
 }
