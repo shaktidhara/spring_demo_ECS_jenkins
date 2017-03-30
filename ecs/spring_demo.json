@@ -18,10 +18,9 @@
                 "options": {
                     "awslogs-group": "spring_demo",
                     "awslogs-region": "us-east-1",
-                    "awslogs-stream-prefix": "spring_demo"
+                    "awslogs-stream-prefix": "/app/plat/spring_demo"
                 }
             }
 		}
 	]
 }
-
