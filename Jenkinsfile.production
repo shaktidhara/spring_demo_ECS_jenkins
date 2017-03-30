@@ -48,4 +48,11 @@ node {
         bingo-pop
     """
   }
+
+  stage('Git Tag') {
+    sh("""
+      git tag -a ${app_version}
+      git push --tags
+    """)
+  }
 }
