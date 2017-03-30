@@ -12,7 +12,15 @@
 					"containerPort": 8080,
 					"hostPort": 80
 				}
-			]
+			],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "spring_demo",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "spring_demo"
+                }
+            }
 		}
 	]
 }
