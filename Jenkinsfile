@@ -1,5 +1,6 @@
 node {
-  println "env.BRANCH_NAME = ${env.BRANCH_NAME}"
+  branch = sh(returnStdout: true, script: "git branch | grep \* | awk '{print $2}'").trim()
+  println "branch = ${branch}"
 
   stage 'Checkout'
   git 'https://github.com/uken/spring_demo.git'
@@ -25,3 +26,4 @@ node {
     }
   }
 }
+
