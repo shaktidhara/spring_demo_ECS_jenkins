@@ -21,7 +21,8 @@ aws ecs register-task-definition \
   --cli-input-json file://$TASK_FAMILY-${APP_VERSION}.json
 
 # Create the service if it doesn't already exist
-# if aws ecs describe-services --region 'us-east-1' --cluster $CLUSTER --services $SERVICE_NAME | jq -e .failures[0]; then
+DESCRIBE_JSON=`aws ecs describe-services --region 'us-east-1' --cluster $CLUSTER --services $SERVICE_NAME`
+if [ `echo $JSON | jq .services[0].status`!="ACTIVE" ] || [ `echo $DESCRIBE_JSON | jq -e .failures[0]` ]; then
   echo "Service '${SERVICE_NAME}' does not exist -- creating it."
   aws ecs create-service \
     --cluster $CLUSTER \
@@ -31,7 +32,7 @@ aws ecs register-task-definition \
     --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
     --role $ECS_SERVICE_ROLE \
     --desired-count 0
-#fi
+fi
 
 # Update the service with the new task definition and desired count
 TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY --region 'us-east-1' | jq .taskDefinition.revision`
