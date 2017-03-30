@@ -9,7 +9,7 @@ ECS_SERVICE_ROLE=$6
 CLUSTER=${7:-default}
 IMAGE_VERSION="v_"${BUILD_NUMBER}
 
-echo "Deploying build number $BUILD_NUMBER for service $SERVICE_NAME"
+echo "Deploying build number $BUILD_NUMBER for service '$SERVICE_NAME'"
 
 # Create a new task definition for this build
 sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ecs/$TASK_FAMILY.json > $TASK_FAMILY-v_${BUILD_NUMBER}.json
