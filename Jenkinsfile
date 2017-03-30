@@ -1,4 +1,7 @@
 node {
+  println env.getEnvironment()
+
+
   stage 'Checkout'
   git 'https://github.com/uken/spring_demo.git'
 
