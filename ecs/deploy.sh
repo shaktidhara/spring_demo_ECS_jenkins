@@ -13,7 +13,7 @@ CLUSTER=${9:-default}
 echo "Deploying build number $APP_VERSION for service '$SERVICE_NAME'"
 
 # Create a new task definition for this build
-sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$GAME/$ENVIRONMENT/$TASK_FAMILY.json > $TASK_FAMILY-${APP_VERSION}.json
+sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$GAME/$ENVIRONMENT/task-definition.json > $TASK_FAMILY-${APP_VERSION}.json
 
 aws ecs register-task-definition \
   --family $TASK_FAMILY \
