@@ -1,5 +1,6 @@
 node {
   branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
+  app_version = "rc_${currentBuild.number}"
 
   stage('Checkout') {
     git 'https://github.com/uken/spring_demo.git'
@@ -20,7 +21,7 @@ node {
 
     stage('Docker push') {
       docker.withRegistry('https://661382096004.dkr.ecr.us-east-1.amazonaws.com/bingo-pop', 'ecr:us-east-1:main-aws-credentials') {
-        docker.image('spring_demo')
+        docker.image('spring_demo').push(app_version)
       }
     }
 
@@ -28,7 +29,7 @@ node {
       sh """
         ./ecs/deploy.sh \
           spring_demo_service \
-          ${currentBuild.number} \
+          ${app_version} \
           spring_demo \
           bingo-pop-refds \
           8080 \

@@ -13,12 +13,12 @@ CLUSTER=${9:-default}
 echo "Deploying build number $APP_VERSION for service '$SERVICE_NAME'"
 
 # Create a new task definition for this build
-sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$GAME/$ENVIRONMENT/$TASK_FAMILY.json > $TASK_FAMILY-v_${APP_VERSION}.json
+sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$GAME/$ENVIRONMENT/$TASK_FAMILY.json > $TASK_FAMILY-${APP_VERSION}.json
 
 aws ecs register-task-definition \
   --family $TASK_FAMILY \
   --region 'us-east-1' \
-  --cli-input-json file://$TASK_FAMILY-v_${APP_VERSION}.json
+  --cli-input-json file://$TASK_FAMILY-${APP_VERSION}.json
 
 # Create the service if it doesn't already exist
 if aws ecs describe-services --region 'us-east-1' --cluser $CLUSTER --services $SERVICE_NAME | jq -e .failures[0]; then
