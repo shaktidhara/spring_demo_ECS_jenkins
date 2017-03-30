@@ -1,8 +1,10 @@
 node {
+  println "Building and deploying '${params.GIT_HASH}'"
   branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
 
   stage('Checkout') {
     git 'https://github.com/uken/spring_demo.git'
+    sh "git checkout ${params.GIT_HASH}"
   }
 
   stage('Tests') {
