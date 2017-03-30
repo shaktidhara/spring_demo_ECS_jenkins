@@ -22,7 +22,7 @@ aws ecs register-task-definition \
 
 # Create the service if it doesn't already exist
 DESCRIBE_JSON=`aws ecs describe-services --region 'us-east-1' --cluster $CLUSTER --services $SERVICE_NAME`
-if [ `echo $JSON | jq .services[0].status`!="ACTIVE" ] || [ `echo $DESCRIBE_JSON | jq -e .failures[0]` ]; then
+if [ ! `echo $JSON | jq .services[0].status`="ACTIVE" ] || [ `echo $DESCRIBE_JSON | jq -e .failures[0]` ]; then
   echo "Service '${SERVICE_NAME}' does not exist -- creating it."
   aws ecs create-service \
     --cluster $CLUSTER \
