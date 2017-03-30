@@ -21,7 +21,7 @@ aws ecs register-task-definition \
   --cli-input-json file://$TASK_FAMILY-${APP_VERSION}.json
 
 # Create the service if it doesn't already exist
-if aws ecs describe-services --region 'us-east-1' --cluser $CLUSTER --services $SERVICE_NAME | jq -e .failures[0]; then
+if aws ecs describe-services --region 'us-east-1' --services $SERVICE_NAME | jq -e .failures[0]; then
   aws ecs create-service --cluster $CLUSTER \
     --region 'us-east-1' \
     --service-name $SERVICE_NAME \
