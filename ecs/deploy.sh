@@ -16,14 +16,13 @@ sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ecs/$TASK_FAMILY.json > $TASK_FAMILY
 aws ecs register-task-definition --family $TASK_FAMILY --region 'us-east-1' --cli-input-json file://$TASK_FAMILY-v_${BUILD_NUMBER}.json
 
 # Create the service if it doesn't already exist
-if aws ecs describe-services --region 'us-east-1' --services $SERVICE_NAME | jq -e .failures[0]; then
-  echo "aws ecs create-service --cluster $CLUSTER --region 'us-east-1' --service-name $SERVICE_NAME --task-definition $TASK_FAMILY --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT --role $ECS_SERVICE_ROLE --desired-count 0"
+if aws ecs describe-services --region 'us-east-1' --cluser $CLUSTER --services $SERVICE_NAME | jq -e .failures[0]; then
   aws ecs create-service --cluster $CLUSTER --region 'us-east-1' --service-name $SERVICE_NAME --task-definition $TASK_FAMILY --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT --role $ECS_SERVICE_ROLE --desired-count 0
 fi
 
 # Update the service with the new task definition and desired count
 TASK_REVISION=`aws ecs describe-task-definition --task-definition $TASK_FAMILY --region 'us-east-1' | jq .taskDefinition.revision`
-DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} --region 'us-east-1' | jq .services[0].desiredCount`
+DESIRED_COUNT=`aws ecs describe-services --cluster $CLUSTER --services ${SERVICE_NAME} --region 'us-east-1' | jq .services[0].desiredCount`
 
 if [ ${DESIRED_COUNT} = "0" ]; then
     DESIRED_COUNT="2"
