@@ -22,6 +22,7 @@ aws ecs register-task-definition \
 
 # Create the service if it doesn't already exist
 if aws ecs describe-services --region 'us-east-1' --services $SERVICE_NAME | jq -e .failures[0]; then
+  echo "Service '${SERVICE_NAME}' does not exist -- creating it."
   aws ecs create-service --cluster $CLUSTER \
     --region 'us-east-1' \
     --service-name $SERVICE_NAME \
