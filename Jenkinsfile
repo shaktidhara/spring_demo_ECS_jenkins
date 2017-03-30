@@ -1,5 +1,5 @@
 node {
-  println "env.BRANCH_NAME = ${env.BRANCH_NAME}"
+  println "BRANCH_NAME = ${BRANCH_NAME}"
 
   stage 'Checkout'
   git 'https://github.com/uken/spring_demo.git'
@@ -7,7 +7,7 @@ node {
   stage 'Tests'
   sh "./mvnw verify"
 
-  if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'production') {
+  if (BRANCH_NAME == 'master' || BRANCH_NAME == 'production') {
     stage 'Maven build'
     sh "./mvnw clean package -Dmaven.test.skip=true"
 
@@ -19,7 +19,7 @@ node {
       docker.image('spring_demo').push('v_' + currentBuild.number)
     }
 
-    if (env.BRANCH_NAME == 'master') {
+    if (BRANCH_NAME == 'master') {
       stage 'Deploy'
        sh "./ecs/deploy.sh spring_demo_service ${currentBuild.number} spring_demo bingo-pop-refds 8080 Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K bingo-pop"
     }
