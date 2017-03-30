@@ -6,12 +6,14 @@ TASK_FAMILY=$3
 LOAD_BALANCER_NAME=$4
 CONTAINER_PORT=$5
 ECS_SERVICE_ROLE=$6
-CLUSTER=${7:-default}
+GAME=$7
+ENVIRONMENT=$8
+CLUSTER=${9:-default}
 
 echo "Deploying build number $APP_VERSION for service '$SERVICE_NAME'"
 
 # Create a new task definition for this build
-sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$TASK_FAMILY.json > $TASK_FAMILY-v_${APP_VERSION}.json
+sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$GAME/$ENVIRONMENT/$TASK_FAMILY.json > $TASK_FAMILY-v_${APP_VERSION}.json
 
 aws ecs register-task-definition \
   --family $TASK_FAMILY \
