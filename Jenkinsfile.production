@@ -7,7 +7,7 @@ node {
   }
 
   maven_version = sh(returnStdout: true, script: """
-    mvnw -q \
+    ./mvnw -q \
     -Dexec.executable="echo" \
     -Dexec.args='\${project.version}' \
     --non-recursive \
