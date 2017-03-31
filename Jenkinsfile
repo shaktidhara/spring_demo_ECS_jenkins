@@ -34,8 +34,8 @@ node {
           bingo-pop-refds \
           8080 \
           Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
-          bingo \
           staging \
+          bingo \
           bingo-pop
       """
     }
