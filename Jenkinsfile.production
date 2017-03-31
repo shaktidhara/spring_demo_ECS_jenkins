@@ -3,7 +3,7 @@ node {
 
   stage('Checkout') {
     sh 'git config -l'
-    git 'https://github.com/uken/spring_demo'
+    git 'git@github.com:uken/spring_demo.git'
     sh "git checkout ${params.GIT_HASH}"
   }
 
