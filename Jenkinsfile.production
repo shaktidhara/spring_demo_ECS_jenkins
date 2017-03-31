@@ -34,6 +34,13 @@ node {
     }
   }
 
+  stage('Git Tag') {
+    sh("""
+      git tag -a ${app_version} -m 'add tag for production release version ${app_version}'
+      git push --tags
+    """)
+  }
+
   stage('Deploy Production') {
     sh """
       ./ecs/deploy.sh \
@@ -47,12 +54,5 @@ node {
         production \
         bingo-pop
     """
-  }
-
-  stage('Git Tag') {
-    sh("""
-      git tag -a ${app_version} -m 'add tag for production release version ${app_version}'
-      git push --tags
-    """)
   }
 }
