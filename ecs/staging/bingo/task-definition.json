@@ -5,7 +5,7 @@
             "image": "661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo:%APP_VERSION%",
             "name": "spring_demo",
 			"environment" : [
-			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m -Dcom.sun.management.jmxremote.rmi.port=9090 -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=9090 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=localhost" }
+			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m"}
 			],
             "cpu": 128,
             "memory": 256,
@@ -14,10 +14,6 @@
                 {
                     "containerPort": 8080,
                     "hostPort": 80
-                },
-                {
-                    "containerPort": 9010,
-                    "hostPort": 9010
                 }
             ],
             "logConfiguration": {
