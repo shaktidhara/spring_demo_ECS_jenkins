@@ -5,7 +5,7 @@
 
 	<groupId>com.platform</groupId>
 	<artifactId>spring_demo</artifactId>
-	<version>0.1.9</version>
+	<version>0.1.10</version>
 	<packaging>jar</packaging>
 
 	<name>demo</name>

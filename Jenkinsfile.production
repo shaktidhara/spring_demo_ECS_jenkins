@@ -2,7 +2,6 @@ node {
   println "Building and deploying '${params.GIT_HASH}'"
 
   stage('Checkout') {
-    sh 'git config -l'
     git 'git@github.com:uken/spring_demo.git'
     sh "git checkout ${params.GIT_HASH}"
   }
