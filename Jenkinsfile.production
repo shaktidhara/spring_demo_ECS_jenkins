@@ -51,8 +51,6 @@ node {
 
   stage('Git Tag') {
     sh("""
-      git config user.email "jobs@uken.com"
-      git config user.name "qbert"
       git tag -a ${app_version} -m 'add tag for production release version ${app_version}'
       git push --tags
     """)
