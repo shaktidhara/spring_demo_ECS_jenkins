@@ -5,16 +5,14 @@
             "image": "661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo:%APP_VERSION%",
             "name": "spring_demo",
 			"environment" : [
-			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m"}
+			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m -javaagent:/glowroot.jar"}
 			],
             "cpu": 128,
             "memory": 256,
             "essential": true,
             "portMappings": [
-                {
-                    "containerPort": 8080,
-                    "hostPort": 80
-                }
+                { "containerPort": 8080, "hostPort": 80},
+                { "containerPort": 4000, "hostPort": 4000}
             ],
             "logConfiguration": {
                 "logDriver": "awslogs",
