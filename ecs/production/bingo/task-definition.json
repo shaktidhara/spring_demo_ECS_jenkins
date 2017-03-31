@@ -4,7 +4,7 @@
 		{
 			"image": "661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo:%APP_VERSION%",
 			"name": "spring_demo",
-			"cpu": 1024,
+			"cpu": 896,
 			"memory": 1024,
 			"essential": true,
 			"portMappings": [
