@@ -2,7 +2,8 @@ node {
   println "Building and deploying '${params.GIT_HASH}'"
 
   stage('Checkout') {
-    git credentialsId: '1125bc59-fd79-40e0-880d-7d20ac19bca2', url: 'https://github.com/uken/spring_demo'
+    sh 'git config -l'
+    git 'https://github.com/uken/spring_demo'
     sh "git checkout ${params.GIT_HASH}"
   }
 
