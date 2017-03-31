@@ -2,7 +2,7 @@ node {
   println "Building and deploying '${params.GIT_HASH}'"
 
   stage('Checkout') {
-    git 'https://github.com/uken/spring_demo.git'
+    git 'git@github.com:uken/spring_demo.git'
     sh "git checkout ${params.GIT_HASH}"
   }
 
@@ -32,6 +32,13 @@ node {
     docker.withRegistry('https://661382096004.dkr.ecr.us-east-1.amazonaws.com/bingo-pop', 'ecr:us-east-1:main-aws-credentials') {
       docker.image('spring_demo').push(app_version)
     }
+  }
+
+  stage('Git Tag') {
+    sh("""
+      git tag -a ${app_version} -m 'add tag for production release version ${app_version}'
+      git push --tags
+    """)
   }
 
   stage('Deploy Production') {
