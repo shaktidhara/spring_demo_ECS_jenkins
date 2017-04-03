@@ -4,11 +4,12 @@ SERVICE_NAME=$1
 APP_VERSION=$2
 TASK_FAMILY=$3
 LOAD_BALANCER_NAME=$4
-CONTAINER_PORT=$5
-ECS_SERVICE_ROLE=$6
-ENVIRONMENT=$7
+TARGET_GROUP_ARN=$5
+CONTAINER_PORT=$6
+ECS_SERVICE_ROLE=$7
 GAME=$8
-CLUSTER=${9:-default}
+ENVIRONMENT=$9
+CLUSTER=${10:-default}
 
 echo "Deploying build number $APP_VERSION for service '$SERVICE_NAME'"
 
@@ -29,7 +30,7 @@ if [ ! `echo $DESCRIBE_JSON | jq .services[0].status | grep -w "ACTIVE"` ] || ec
     --region 'us-east-1' \
     --service-name $SERVICE_NAME \
     --task-definition $TASK_FAMILY \
-    --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
+    --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,targetGroupArn=$TARGET_GROUP_ARN,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
     --role $ECS_SERVICE_ROLE \
     --desired-count 0
 fi
