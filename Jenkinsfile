@@ -29,7 +29,7 @@ node {
       sh """
         ./ecs/deploy.sh \
           spring_demo_service \
-          ${app_version} \
+          $app_version \
           spring_demo \
           bingo-pop-ecs-staging \
           iarn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/bingo-pop-refds-staging/8c9a57ec295f3c13 \
