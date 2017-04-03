@@ -31,7 +31,7 @@ node {
           spring_demo_service \
           ${app_version} \
           spring_demo \
-          bingo-pop-refds \
+          bingo-pop-ecs-staging \
           8080 \
           Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
           staging \
