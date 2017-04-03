@@ -3,18 +3,16 @@
 SERVICE_NAME=$1
 APP_VERSION=$2
 TASK_FAMILY=$3
-LOAD_BALANCER_NAME=$4
-TARGET_GROUP_ARN=$5
-CONTAINER_PORT=$6
-ECS_SERVICE_ROLE=$7
-GAME=$8
-ENVIRONMENT=$9
-CLUSTER=${10:-default}
+TARGET_GROUP_ARN=$4
+CONTAINER_PORT=$5
+ECS_SERVICE_ROLE=$6
+GAME=$7
+ENVIRONMENT=$8
+CLUSTER=${9:-default}
 
 echo "SERVICE_NAME=$SERVICE_NAME"
 echo "APP_VERSION=$APP_VERSION"
 echo "TASK_FAMILY=$TASK_FAMILY"
-echo "LOAD_BALANCER_NAME=$LOAD_BALANCER_NAME"
 echo "TARGET_GROUP_ARN=$TARGET_GROUP_ARN"
 echo "CONTAINER_PORT=$CONTAINER_PORT"
 echo "ECS_SERVICE_ROLE=$ECS_SERVICE_ROLE"
@@ -41,7 +39,7 @@ if [ ! `echo $DESCRIBE_JSON | jq .services[0].status | grep -w "ACTIVE"` ] || ec
     --region 'us-east-1' \
     --service-name $SERVICE_NAME \
     --task-definition $TASK_FAMILY \
-    --load-balancers targetGroupArn=$TARGET_GROUP_ARN,loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
+    --load-balancers targetGroupArn=$TARGET_GROUP_ARN,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
     --role $ECS_SERVICE_ROLE \
     --desired-count 0
 fi

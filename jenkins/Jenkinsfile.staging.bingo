@@ -31,7 +31,6 @@ node {
           spring_demo_service \
           $app_version \
           spring_demo \
-          bingo-pop-ecs-staging \
           arn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/bingo-pop-refds-staging/8c9a57ec295f3c13 \
           8080 \
           Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
