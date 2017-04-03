@@ -41,7 +41,7 @@ if [ ! `echo $DESCRIBE_JSON | jq .services[0].status | grep -w "ACTIVE"` ] || ec
     --region 'us-east-1' \
     --service-name $SERVICE_NAME \
     --task-definition $TASK_FAMILY \
-    --load-balancers loadBalancerName=$LOAD_BALANCER_NAME,targetGroupArn=$TARGET_GROUP_ARN,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
+    --load-balancers targetGroupArn=$TARGET_GROUP_ARN,loadBalancerName=$LOAD_BALANCER_NAME,containerName=$TASK_FAMILY,containerPort=$CONTAINER_PORT \
     --role $ECS_SERVICE_ROLE \
     --desired-count 0
 fi
