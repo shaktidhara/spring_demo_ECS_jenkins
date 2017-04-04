@@ -20,7 +20,7 @@ echo "GAME=$GAME"
 echo "ENVIRONMENT=$ENVIRONMENT"
 echo "CLUSTER=$CLUSTER"
 
-echo "Deploying build number $APP_VERSION for service '$SERVICE_NAME'"
+echo "Deploying build number '$APP_VERSION' for service '$SERVICE_NAME'"
 
 # Create a new task definition for this build
 sed -e "s/%APP_VERSION%/${APP_VERSION}/g" ecs/$ENVIRONMENT/$GAME/task-definition.json > $TASK_FAMILY-${APP_VERSION}.json
