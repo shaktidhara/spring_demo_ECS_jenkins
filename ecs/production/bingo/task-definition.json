@@ -1,5 +1,6 @@
 {
 	"family": "spring_demo",
+  "taskRoleArn": "arn:aws:iam::661382096004:role/DynamoDBGame",
 	"containerDefinitions": [
 		{
 			"image": "661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo:%APP_VERSION%",
