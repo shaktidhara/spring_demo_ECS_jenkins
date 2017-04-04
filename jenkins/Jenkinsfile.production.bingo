@@ -47,7 +47,7 @@ node {
         spring_demo_service_production \
         $app_version \
         spring_demo \
-        arn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/bingo-pop-refds-prod/42e36e13f06501ad \
+        arn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/bingo-pop-refds-prod/bef8b287e1f07ffa \
         8080 \
         Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
         bingo \
