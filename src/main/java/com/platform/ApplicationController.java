@@ -23,7 +23,7 @@ public class ApplicationController {
     
     @Autowired
     private CounterService counterService;
-
+    
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
     	logger.info("Saying hello info");
