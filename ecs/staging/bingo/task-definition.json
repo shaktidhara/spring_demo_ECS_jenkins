@@ -7,7 +7,7 @@
             "name": "spring_demo",
 			"environment" : [
 			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m -javaagent:/glowroot.jar"},
-          		{ "name": "BASE_URL", "value": "/bingo-pop/staging/refds/v1" }
+          		{ "name": "BASE_URL", "value": "/spring-demo/staging" }
 			],
             "cpu": 128,
             "memory": 256,
