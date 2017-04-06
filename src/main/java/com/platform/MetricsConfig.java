@@ -31,41 +31,42 @@ public class MetricsConfig extends MetricsConfigurerAdapter {
 
 	final static Logger logger = LoggerFactory.getLogger(MetricsConfig.class);
 
-	@Value("${spring.application.name:demo2}")
-	private String applicationName;
-
-	@Value("${spring.profiles.active:dev}")
-	private String environment;
+	@Value("${uken.metrics.prefix:spring.boot}")
+	private String prefix;
+	
+	@Value("${uken.metrics.namespace:dev.demo}")
+	private String nameSpace;
+	
+	@Value("${uken.metrics.cloudwatch.region:us-east-1}")
+	private String region;
 
 	@Autowired
 	private SystemPublicMetrics systemPublicMetrics;
 
 	@Override
 	public void configureReporters(MetricRegistry metricRegistry) {
+		
 		AmazonCloudWatchAsync amazonCloudWatchAsync = new AmazonCloudWatchAsyncClient();
-		amazonCloudWatchAsync.setRegion(Region.getRegion(Regions.US_EAST_1));
+		amazonCloudWatchAsync.setRegion(Region.getRegion(Regions.fromName(region)));
 
-		metricRegistry.register("spring.boot", (MetricSet) () -> {
+		metricRegistry.register(prefix, (MetricSet) () -> {
 			final Map<String, Metric> gauges = new HashMap<String, Metric>();
 
-			for (final org.springframework.boot.actuate.metrics.Metric<?> springMetric : systemPublicMetrics
-					.metrics()) {
-
-				gauges.put(springMetric.getName(), (Gauge<Object>) () -> {
-
-					return systemPublicMetrics.metrics().stream()
-							.filter(m -> StringUtils.equals(m.getName(), springMetric.getName())).map(m -> m.getValue())
-							.findFirst().orElse(null);
-
-				});
+			for (final org.springframework.boot.actuate.metrics.Metric<?> springMetric : systemPublicMetrics.metrics()) {
+					gauges.put(springMetric.getName(), (Gauge<Object>) () -> {
+						return systemPublicMetrics.metrics().stream()
+								.filter(m -> StringUtils.equals(m.getName(), springMetric.getName()))
+								 .map(m -> m.getValue())
+								.findFirst().orElse(null);
+	
+					});
+				
 			}
 			return Collections.unmodifiableMap(gauges);
 		});
 
-		String nameSpace = environment + "." + applicationName;
+		
 		CloudWatchReporter cloudWatchReporter = new CloudWatchReporter(metricRegistry, nameSpace, amazonCloudWatchAsync);
-
-		logger.info("Namespace is" + nameSpace);
 
 		registerReporter(cloudWatchReporter).start(1, TimeUnit.MINUTES);
 	}

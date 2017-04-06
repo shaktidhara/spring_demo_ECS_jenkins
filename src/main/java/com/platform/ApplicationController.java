@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codahale.metrics.annotation.Timed;
+
 /**
  * Created by mat on 2017-03-27.
  */
@@ -24,8 +26,17 @@ public class ApplicationController {
     @Autowired
     private CounterService counterService;
     
+    @Timed
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
+    	
+    	try {
+    	    Thread.sleep(3500);
+    	} catch(InterruptedException ex) {
+    	    Thread.currentThread().interrupt();
+    	}
+
+    	
     	logger.info("Saying hello info");
     	counterService.increment("demo.hello.request");
         return "Hi " + response + "!";
