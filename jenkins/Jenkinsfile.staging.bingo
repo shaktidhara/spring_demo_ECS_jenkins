@@ -20,7 +20,7 @@ node {
     }
 
     stage('Docker push') {
-      docker.withRegistry('https://661382096004.dkr.ecr.us-east-1.amazonaws.com/bingo-pop', 'ecr:us-east-1:main-aws-credentials') {
+      docker.withRegistry('https://661382096004.dkr.ecr.us-east-1.amazonaws.com/bingo-pop', 'ecr:us-east-1:aws-ecs-container-registry') {
         docker.image('spring_demo').push(app_version)
       }
     }
