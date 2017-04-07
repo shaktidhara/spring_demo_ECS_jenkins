@@ -1,6 +1,6 @@
 {
 	"family": "spring_demo",
-  "taskRoleArn": "arn:aws:iam::661382096004:role/DynamoDBGame",
+ 	"taskRoleArn": "arn:aws:iam::661382096004:role/DynamoDBGame",
 	"containerDefinitions": [
 		{
 			"image": "661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo:%APP_VERSION%",
@@ -9,11 +9,9 @@
 			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m -javaagent:/glowroot.jar"},
           		{ "name": "BASE_URL", "value": "/spring-demo/prod" },
           		{ "name": "UKEN_METRICS_NAMESPACE", "value": "prod.bingo" }
-          		
-          		
 			],
 			"cpu": 128,
-			"memory": 256,
+			"memory": 356,
 			"essential": true,
 			"portMappings": [
                 { "containerPort": 8080 },
