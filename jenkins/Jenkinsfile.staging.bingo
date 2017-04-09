@@ -16,7 +16,7 @@ node {
     }
 
     stage('Docker build') {
-      sh("docker build . -t $app_verison")
+      sh("docker build -t $app_verison .")
     }
 
     stage('Docker push') {
