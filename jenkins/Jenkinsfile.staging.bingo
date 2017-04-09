@@ -17,20 +17,14 @@ node {
     }
 
     stage('Docker build') {
-      sh """
-        ./ecs/docker_build.sh \
-          $app_name \
-          $app_version \
-          661382096004.dkr.ecr.us-east-1.amazonaws.com
-      """
+      sh "docker build -t $app_name:$app_version ."
     }
 
     stage('Docker push') {
       sh """
         ./ecs/docker_push.sh \
           $app_name \
-          $app_version \
-          'https://661382096004.dkr.ecr.us-east-1.amazonaws.com'
+          $app_version
       """
     }
 
