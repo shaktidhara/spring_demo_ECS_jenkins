@@ -18,7 +18,7 @@ node {
 
     stage('Docker build') {
       sh """
-        ./ecs/docker_build \
+        ./ecs/docker_build.sh \
           $app_name \
           $app_version \
           661382096004.dkr.ecr.us-east-1.amazonaws.com
