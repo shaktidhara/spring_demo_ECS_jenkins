@@ -22,7 +22,7 @@ node {
     stage('Docker push') {
       sh """
         ./ecs/docker_push.sh \
-          spring_boot \
+          spring_demo \
           $app_version \
           'https://661382096004.dkr.ecr.us-east-1.amazonaws.com/bingo-pop'
       """
