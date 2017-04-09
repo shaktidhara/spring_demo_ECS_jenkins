@@ -1,7 +1,7 @@
 node {
-  branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
   app_name = "spring_demo"
   app_version = "rc_${currentBuild.number}"
+  branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
 
   stage('Checkout') {
     git 'https://github.com/uken/spring_demo.git'
