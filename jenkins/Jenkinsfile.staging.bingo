@@ -1,5 +1,6 @@
 node {
   branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
+  app_name = "spring_demo"
   app_version = "rc_${currentBuild.number}"
 
   stage('Checkout') {
@@ -16,13 +17,18 @@ node {
     }
 
     stage('Docker build') {
-      sh("docker build -t spring_demo:$app_version .")
+      sh """
+        ./ecs/docker_build \
+          $app_name \
+          $app_version \
+          661382096004.dkr.ecr.us-east-1.amazonaws.com
+      """
     }
 
     stage('Docker push') {
       sh """
         ./ecs/docker_push.sh \
-          spring_demo \
+          $app_name \
           $app_version \
           'https://661382096004.dkr.ecr.us-east-1.amazonaws.com'
       """
@@ -33,7 +39,7 @@ node {
         ./ecs/deploy.sh \
           spring_demo_service \
           $app_version \
-          spring_demo \
+          $app_name \
           arn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/spring-demo-staging/f659187993319b96 \
           8080 \
           Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
