@@ -24,6 +24,7 @@ node {
       sh """
         ./ecs/docker_push.sh \
           $app_name \
+          661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo \
           $app_version
       """
     }

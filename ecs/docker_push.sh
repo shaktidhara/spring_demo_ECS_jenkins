@@ -1,9 +1,11 @@
 #!/bin/bash
 
-IMAGE_NAME=$1
-TAG=$2
-REGION=${3:-"us-east-1"}
+IMAGE=$1
+REPO=$2
+TAG=$3
+REGION=${4:-"us-east-1"}
 
+docker tag $IMAGE:$TAG $REPO:$TAG
 eval `aws ecr get-login --region $REGION`
-docker push $IMAGE_NAME:$TAG
+docker push $REPO:$TAG
 
