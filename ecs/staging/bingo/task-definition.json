@@ -14,7 +14,8 @@
             "memory": 356,
             "essential": true,
             "portMappings": [
-                { "containerPort": 8080 }
+                { "containerPort": 8080 },
+                { "containerPort": 4000 }
             ],
             "logConfiguration": {
                 "logDriver": "awslogs",
