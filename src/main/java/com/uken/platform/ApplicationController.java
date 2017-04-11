@@ -1,15 +1,14 @@
-package com.platform;
+package com.uken.platform;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.codahale.metrics.annotation.Timed;
 
 /**
  * Created by mat on 2017-03-27.
@@ -26,19 +25,22 @@ public class ApplicationController {
     @Autowired
     private CounterService counterService;
     
-    @Timed
+    @Autowired
+    private GaugeService gaugeService;
+	
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
     	
+    	gaugeService.submit("demo.hello.gauge", 5);
+    	
     	try {
     	    Thread.sleep(3500);
-    	} catch(InterruptedException ex) {
+		} catch(InterruptedException ex) {
     	    Thread.currentThread().interrupt();
-    	}
+		}
 
-    	
     	logger.info("Saying hello info");
-    	counterService.increment("demo.hello.request");
+    	counterService.increment("demo.hello.counter");
         return "Hi " + response + "!";
     }
 }

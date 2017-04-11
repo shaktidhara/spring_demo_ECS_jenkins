@@ -8,7 +8,7 @@
 			"environment" : [
 			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m -javaagent:/glowroot.jar"},
           		{ "name": "BASE_URL", "value": "/spring-demo/staging" },
-          		{ "name": "UKEN_METRICS_NAMESPACE", "value": "staging.bingo" }
+          		{ "name": "UKEN_METRICS_NAMESPACE", "value": "staging.bingo.demo" }
 			],
             "cpu": 128,
             "memory": 356,
