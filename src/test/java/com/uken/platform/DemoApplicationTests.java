@@ -1,4 +1,4 @@
-package com.platform;
+package com.uken.platform;
 
 import static org.junit.Assert.assertTrue;
 
