@@ -1,4 +1,4 @@
-package com.platform;
+package com.uken.platform;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
