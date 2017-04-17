@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by mat on 2017-03-27.
  */
 @RestController
-@RequestMapping(value = "${base_url}")
+@RequestMapping(value = "${uken.baseurl}")
 public class ApplicationController {
 
 	final static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
