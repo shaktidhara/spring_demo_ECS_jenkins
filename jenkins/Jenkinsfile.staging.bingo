@@ -2,10 +2,6 @@ node {
   app_name = "spring_demo"
   app_version = "rc_${currentBuild.number}"
 
-  stage('Checkout') {
-    git 'https://github.com/uken/spring_demo.git'
-  }
-
   stage('Deploy Staging') {
     sh """
       ./ecs/deploy.sh \
