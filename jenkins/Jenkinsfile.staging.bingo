@@ -1,48 +1,24 @@
 node {
   app_name = "spring_demo"
   app_version = "rc_${currentBuild.number}"
-  branch = sh(returnStdout: true, script: "git branch | grep \\* | awk '{print \$2}'").trim()
 
   stage('Checkout') {
     git 'https://github.com/uken/spring_demo.git'
   }
 
-  stage('Tests') {
-    sh "./mvnw verify"
-  }
-
-  if (branch == 'master') {
-    stage('Maven build') {
-      sh "./mvnw clean package -Dmaven.test.skip=true"
-    }
-
-    stage('Docker build') {
-      sh "docker build -t $app_name:$app_version ."
-    }
-
-    stage('Docker push') {
-      sh """
-        ./ecs/docker_push.sh \
-          $app_name \
-          661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo \
-          $app_version
-      """
-    }
-
-    stage('Deploy Staging') {
-      sh """
-        ./ecs/deploy.sh \
-          spring_demo_service \
-          $app_version \
-          $app_name \
-          arn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/spring-demo-staging/f659187993319b96 \
-          8080 \
-          Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
-          bingo \
-          staging \
-          bingo-pop
-      """
-    }
+  stage('Deploy Staging') {
+    sh """
+      ./ecs/deploy.sh \
+        spring_demo_service \
+        $app_version \
+        $app_name \
+        arn:aws:elasticloadbalancing:us-east-1:661382096004:targetgroup/spring-demo-staging/f659187993319b96 \
+        8080 \
+        Platform-Jenkins-EC2BuilderIamUser-6DB6WP8EH17K \
+        bingo \
+        staging \
+        bingo-pop
+    """
   }
 }
 
