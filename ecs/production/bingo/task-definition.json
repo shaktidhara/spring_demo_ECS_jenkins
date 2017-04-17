@@ -7,7 +7,7 @@
 			"name": "spring_demo",
 			"environment" : [
 			    { "name" : "JAVA_OPTS", "value" : "-Xmx256m -javaagent:/glowroot.jar"},
-          		{ "name": "BASE_URL", "value": "/spring-demo/prod" },
+          		{ "name": "UKEN_BASEURL", "value": "/spring-demo/prod" },
           		{ "name": "UKEN_METRICS_NAMESPACE", "value": "prod.bingo.demo" }
 			],
 			"cpu": 128,
