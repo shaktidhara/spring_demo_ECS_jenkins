@@ -2,6 +2,27 @@ node {
   app_name = "spring_demo"
   app_version = "rc_${currentBuild.number}"
 
+  stage('Tests') {
+    sh "./mvnw verify"
+  }
+
+  stage('Maven build') {
+    sh "./mvnw clean package -Dmaven.test.skip=true"
+  }
+
+  stage('Docker build') {
+    sh "docker build -t $app_name:$app_version ."
+  }
+
+  stage('Docker push') {
+    sh """
+      ./ecs/docker_push.sh \
+        $app_name \
+        661382096004.dkr.ecr.us-east-1.amazonaws.com/spring_demo \
+        $app_version
+    """
+  }
+
   stage('Deploy Staging') {
     sh """
       ./ecs/deploy.sh \
