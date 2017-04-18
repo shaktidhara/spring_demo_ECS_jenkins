@@ -14,7 +14,7 @@ node {
     org.codehaus.mojo:exec-maven-plugin:1.3.1:exec
   """).trim()
 
-  app_version = "v_${maven_version}"
+  app_version = "v_${maven_version}_BNG_${currentBuild.number}"
 
   stage('Tests') {
     sh "./mvnw verify"
