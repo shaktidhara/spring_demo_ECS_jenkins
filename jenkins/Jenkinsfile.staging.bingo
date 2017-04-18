@@ -2,6 +2,10 @@ node {
   app_name = "spring_demo"
   app_version = "rc_${currentBuild.number}"
 
+  stage('Checkout') {
+    git 'git@github.com:uken/spring_demo.git'
+  }
+
   stage('Tests') {
     sh "./mvnw verify"
   }
