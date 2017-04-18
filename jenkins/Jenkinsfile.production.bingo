@@ -14,6 +14,7 @@ node {
     org.codehaus.mojo:exec-maven-plugin:1.3.1:exec
   """).trim()
 
+  app_name = "spring_demo"
   app_version = "v_${maven_version}_BNG_${currentBuild.number}"
 
   stage('Tests') {
@@ -39,7 +40,7 @@ node {
 
   stage('Git Tag') {
     sh("""
-      git tag -a ${app_version} -m 'add tag for production release version ${app_version}'
+      git tag -a $app_version -m 'add tag for production release version $app_version'
       git push --tags
     """)
   }
