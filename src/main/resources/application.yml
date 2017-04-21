@@ -11,12 +11,10 @@ cloud.aws.region.static: us-east-1
 management.security.enabled: false
 
 logging.level.org.springframework.cloud.aws.actuate: TRACE
-
 ---
 
 spring:
   profiles: staging
-server.contextPath: /spring-demo/staging
 uken.metrics.namespce: staging.bingo.demo
 ---
 
@@ -25,4 +23,3 @@ spring:
 uken:
   hello_response: Production
   metrics.namespace: prod.bingo.demo
-server.contextPath: /spring-demo/prod
