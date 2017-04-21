@@ -1,0 +1,28 @@
+uken:
+  hello_response: Default
+  cloud.aws.cloudwatch: # for actuator cloudwatch metric export
+    region: us-east-1
+    namespace: dev.testgihad5.demo
+
+#need to set this in dev env or app won't run
+cloud.aws.region.static: us-east-1
+
+#disabled security for actuator
+management.security.enabled: false
+
+logging.level.org.springframework.cloud.aws.actuate: TRACE
+
+---
+
+spring:
+  profiles: staging
+server.contextPath: /spring-demo/staging
+uken.metrics.namespce: staging.bingo.demo
+---
+
+spring:
+  profiles: production
+uken:
+  hello_response: Production
+  metrics.namespace: prod.bingo.demo
+server.contextPath: /spring-demo/prod

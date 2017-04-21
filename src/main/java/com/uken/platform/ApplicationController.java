@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by mat on 2017-03-27.
  */
 @RestController
-@RequestMapping(value = "${uken.baseurl}")
 public class ApplicationController {
 
 	final static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	
-    @Value("${hello_response}")
+    @Value("${uken.hello_response}")
     private String response;
     
     @Autowired
