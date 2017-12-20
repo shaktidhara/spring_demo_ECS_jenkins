@@ -10,12 +10,16 @@ cloud.aws.region.static: us-east-1
 #disabled security for actuator
 management.security.enabled: false
 
-logging.level.org.springframework.cloud.aws.actuate: TRACE
+logging:
+  level.org.springframework.cloud.aws.actuate: TRACE
+  pattern.console: '%d %-5level [%thread] %logger.%M : %msg%n'
+
 ---
 
 spring:
   profiles: staging
 uken.metrics.namespce: staging.bingo.demo
+
 ---
 
 spring:

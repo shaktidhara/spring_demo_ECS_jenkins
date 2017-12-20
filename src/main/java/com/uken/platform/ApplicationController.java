@@ -29,6 +29,7 @@ public class ApplicationController {
 	
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
+        logger.info("/hello called");
     	
     	gaugeService.submit("demo.hello.gauge", 5);
     	
