@@ -26,12 +26,4 @@
 		</dependency>
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>nexus-release</id>
-			<name>uken nexus release</name>
-			<url>http://nexus.uken.com:8081/repository/maven-releases</url>
-		</repository>
-	</repositories>
-
 </project>
