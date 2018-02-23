@@ -10,37 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by mat on 2017-03-27.
- */
 @RestController
 public class ApplicationController {
 
-	final static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
-	
-    @Value("${uken.hello_response}")
-    private String response;
-    
-    @Autowired
-    private CounterService counterService;
-    
-    @Autowired
-    private GaugeService gaugeService;
-	
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello() {
-        logger.info("/hello called");
-    	
-    	gaugeService.submit("demo.hello.gauge", 5);
-    	
-    	try {
-    	    Thread.sleep(3500);
-		} catch(InterruptedException ex) {
-    	    Thread.currentThread().interrupt();
-		}
+  static final Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 
-    	logger.info("Saying hello info");
-    	counterService.increment("demo.hello.counter");
-        return "Hi " + response + "!";
+  @Value("${uken.hello_response}")
+  private String response;
+
+  @Autowired private CounterService counterService;
+
+  @Autowired private GaugeService gaugeService;
+
+  @RequestMapping(value = "/hello", method = RequestMethod.GET)
+  public String hello() {
+    logger.info("/hello called");
+
+    gaugeService.submit("demo.hello.gauge", 5);
+
+    try {
+      Thread.sleep(3500);
+    } catch (InterruptedException ex) {
+      Thread.currentThread().interrupt();
     }
+
+    logger.info("Saying hello info");
+    counterService.increment("demo.hello.counter");
+    return "Hi " + response + "!";
+  }
 }
