@@ -1,4 +1,5 @@
 spring.application.name: spring_demo
+uken.hello_response: 'Hello Uken!'
 
 ---
 
