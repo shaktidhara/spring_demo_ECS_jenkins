@@ -1,4 +1,4 @@
-package com.uken.platform;
+package com.uken.platform.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class ApplicationController {
+import java.util.Random;
 
-  static final Logger logger = LoggerFactory.getLogger(ApplicationController.class);
+@RestController
+public class ExampleRestController {
+
+  static final Logger logger = LoggerFactory.getLogger(ExampleRestController.class);
 
   @Value("${uken.hello_response}")
   private String response;
@@ -26,15 +28,7 @@ public class ApplicationController {
   public String hello() {
     logger.info("/hello called");
 
-    gaugeService.submit("demo.hello.gauge", 5);
-
-    try {
-      Thread.sleep(3500);
-    } catch (InterruptedException ex) {
-      Thread.currentThread().interrupt();
-    }
-
-    logger.info("Saying hello info");
+    gaugeService.submit("demo.hello.gauge", new Random().nextDouble());
     counterService.increment("demo.hello.counter");
     return "Hi " + response + "!";
   }
