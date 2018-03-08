@@ -1,8 +1,7 @@
 package com.uken.platform.demo.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "users")
