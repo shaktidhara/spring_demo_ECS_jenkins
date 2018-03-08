@@ -1,4 +1,4 @@
-package com.uken.platform.controllers;
+package com.uken.platform.demo.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Controller;
