@@ -59,6 +59,11 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -85,30 +90,30 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 
-			<!--<plugin>-->
-				<!--<groupId>ru.trylogic.maven.plugins</groupId>-->
-				<!--<artifactId>redis-maven-plugin</artifactId>-->
-				<!--<version>1.4.6</version>-->
-				<!--<configuration>-->
-					<!--<forked>true</forked>-->
-				<!--</configuration>-->
-				<!--<executions>-->
-					<!--<execution>-->
-						<!--<id>start-redis</id>-->
-						<!--<phase>pre-integration-test</phase>-->
-						<!--<goals>-->
-							<!--<goal>run</goal>-->
-						<!--</goals>-->
-					<!--</execution>-->
-					<!--<execution>-->
-						<!--<id>stop-redis</id>-->
-						<!--<phase>post-integration-test</phase>-->
-						<!--<goals>-->
-							<!--<goal>shutdown</goal>-->
-						<!--</goals>-->
-					<!--</execution>-->
-				<!--</executions>-->
-			<!--</plugin>-->
+			<plugin>
+				<groupId>ru.trylogic.maven.plugins</groupId>
+				<artifactId>redis-maven-plugin</artifactId>
+				<version>1.4.6</version>
+				<configuration>
+					<forked>true</forked>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-redis</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-redis</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>shutdown</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>

@@ -9,10 +9,10 @@ spring:
     validationQuery: SELECT 1
     driver-class-name: com.mysql.cj.jdbc.Driver
     test-on-borrow: true
-#  redis:
-#    host: localhost
-#    port: 6382
-#    password: ""
+  redis:
+    host: localhost
+    port: 6379
+    password: ""
   jpa:
     show-sql: false
     hibernate: # https://docs.jboss.org/hibernate/orm/4.3/manual/en-US/html/ch03.html#configuration-optional
@@ -34,3 +34,20 @@ uken:
 
 #disabled security for actuator
 management.security.enabled: false
+
+# everything above is default configuration for every profile
+
+---
+
+# this overrides the defaults when running with the test profile
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:mem:hoth:MODE=MySQL # use the in memory h2 DB instead of spinning up MySQL
+    driverClassName: org.h2.Driver
+    username: sa
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+flyway.enabled: false
