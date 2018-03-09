@@ -50,6 +50,10 @@ mvn clean verify
 
 We use swagger to programmatically document our APIs. While running the server, you can visit [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to see it in action. Much of what Swagger picks up is automatic, but you'll also note some `@Api` related annotation which add additional information.
 
+## Datadog
+
+We use Datadog for our APM and custom application metrics. You largely get these for free (along with a YourKit profiler agent, by the way) from our parent docker image. A number of JVM and application level metrics are produced via our metrics library witch is included in the parent pom that this project inherits from. An example of how to implement your own custom metrics is provided in the `ExampleRestController`.  
+
 ## Code Formatting
 
 We use the Google Code Formatter. Builds will fail if your code doesn't match the formatter. Format your code before committing with:
