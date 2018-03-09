@@ -11,6 +11,14 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 
+	<repositories>
+		<repository>
+			<id>data-local</id>
+			<name>data</name>
+			<url>file://${project.basedir}/repo</url>
+		</repository>
+	</repositories>
+
 	<parent>
 		<groupId>com.uken.platform</groupId>
 		<artifactId>service-parent</artifactId>
