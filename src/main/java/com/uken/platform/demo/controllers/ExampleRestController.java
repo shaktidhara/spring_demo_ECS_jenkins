@@ -1,5 +1,7 @@
 package com.uken.platform.demo.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(
+  value = "demo",
+  description =
+      "A sample controller that shows the use of custom metrics and application properties"
+)
 public class ExampleRestController {
 
   static final Logger logger = LoggerFactory.getLogger(ExampleRestController.class);
@@ -24,6 +31,7 @@ public class ExampleRestController {
   @Autowired private GaugeService gaugeService;
 
   @RequestMapping(value = "/hello", method = RequestMethod.GET)
+  @ApiOperation(value = "hellp", notes = "return a response driven by application properties")
   public String hello() {
     logger.info("/hello called");
 

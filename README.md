@@ -35,6 +35,10 @@ The following will run all unit and integration tests, as well as check the code
 mvn clean verify
 ```
 
+## Swagger & API Documentation
+
+We use swagger to programmatically document our APIs. While running the server, you can visit [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to see it in action. Much of what Swagger picks up is automatic, but you'll also note some `@Api` related annotation which add additional information.
+
 ## API
 
 The following are some example requests you can make:
