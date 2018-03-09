@@ -13,6 +13,7 @@ services:
       - '6379:6379'
   web:
     build: .
+    image: uken/demo
     ports:
       - 8080:8080
     links:
@@ -23,6 +24,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 18
+    restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/demo?serverTimezone=UTC&createDatabaseIfNotExist=true
       SPRING_REDIS_HOST: redis
