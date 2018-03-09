@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Example</title>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        var exampleData = JSON.parse(/*[[${exampleData}]]*/ '{}');
+
+        /*]]>*/
+    </script>
+
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <div class="content">
+        Example Static Page
+    </div>
+    <script src="js/example.js"></script>
+</body>
+</html>

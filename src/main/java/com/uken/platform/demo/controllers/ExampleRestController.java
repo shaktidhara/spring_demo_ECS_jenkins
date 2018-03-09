@@ -1,5 +1,8 @@
-package com.uken.platform;
+package com.uken.platform.demo.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ApplicationController {
+@Api(
+  value = "demo",
+  description =
+      "A sample controller that shows the use of custom metrics and application properties"
+)
+public class ExampleRestController {
 
-  static final Logger logger = LoggerFactory.getLogger(ApplicationController.class);
+  static final Logger logger = LoggerFactory.getLogger(ExampleRestController.class);
 
   @Value("${uken.hello_response}")
   private String response;
@@ -23,18 +31,11 @@ public class ApplicationController {
   @Autowired private GaugeService gaugeService;
 
   @RequestMapping(value = "/hello", method = RequestMethod.GET)
+  @ApiOperation(value = "hello", notes = "return a response driven by application properties")
   public String hello() {
     logger.info("/hello called");
 
-    gaugeService.submit("demo.hello.gauge", 5);
-
-    try {
-      Thread.sleep(3500);
-    } catch (InterruptedException ex) {
-      Thread.currentThread().interrupt();
-    }
-
-    logger.info("Saying hello info");
+    gaugeService.submit("demo.hello.gauge", new Random().nextDouble());
     counterService.increment("demo.hello.counter");
     return "Hi " + response + "!";
   }

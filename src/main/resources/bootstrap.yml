@@ -1,0 +1,5 @@
+spring:
+  profiles: example_profile
+  cloud:
+      config:
+        uri: http://plt-stg-cfg.ecs2.uken.int

@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.6.35
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: 'demo'
+    ports:
+      - '3306:3306'
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+  web:
+    build: .
+    image: uken/demo
+    ports:
+      - 8080:8080
+    links:
+      - db
+      - redis
+    healthcheck:
+      test: curl -f http://localhost:8080/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 18
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/demo?serverTimezone=UTC&createDatabaseIfNotExist=true
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_REDIS_DATABSE: 0
+      ENDPOINTS_HEALTH_SENSITIVE: 'false'
+      MANAGEMENT_SECURITY_ENABLED: 'false'
+      FLYWAY_ENABLED: 'true'
