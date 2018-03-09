@@ -31,7 +31,7 @@ public class ExampleRestController {
   @Autowired private GaugeService gaugeService;
 
   @RequestMapping(value = "/hello", method = RequestMethod.GET)
-  @ApiOperation(value = "hellp", notes = "return a response driven by application properties")
+  @ApiOperation(value = "hello", notes = "return a response driven by application properties")
   public String hello() {
     logger.info("/hello called");
 
