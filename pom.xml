@@ -19,11 +19,11 @@
 		</repository>
 	</repositories>
 
-	<parent>
-		<groupId>com.uken.platform</groupId>
-		<artifactId>service-parent</artifactId>
-		<version>18-02-23_19-37_f660660</version>
-	</parent>
+    <parent>
+        <groupId>com.uken.platform</groupId>
+        <artifactId>service-parent</artifactId>
+        <version>18-03-13_14-53_a0a4c4e</version>
+    </parent>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->

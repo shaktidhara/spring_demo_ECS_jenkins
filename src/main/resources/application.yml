@@ -20,7 +20,7 @@ spring:
       format_sql: true
       ddl-auto: validate
 
-flyway.enabled: false  # prevent migrations on application server startup
+spring.flyway.enabled: false  # prevent migrations on application server startup
 
 uken:
   hello_response: 'Hello Uken!'
@@ -50,4 +50,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-flyway.enabled: false
+spring.flyway.enabled: false

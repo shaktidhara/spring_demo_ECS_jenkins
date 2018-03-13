@@ -32,9 +32,7 @@ public class UserController {
   )
   @ApiOperation(value = "getUser", notes = "gets and existing user")
   public User getUser(@PathVariable String userId) throws UserNotFound {
-    User user = userRepository.findOne(userId);
-
-    if (user == null) throw new UserNotFound("User '" + userId + "' could not be found");
+    User user = userRepository.findById(userId).orElseThrow(UserNotFound::new);
 
     return user;
   }
@@ -42,7 +40,7 @@ public class UserController {
   @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
   @ApiOperation(value = "deleteUser", notes = "deletes a user")
   public String deleteUser(@PathVariable String userId) {
-    userRepository.delete(userId);
+    userRepository.deleteById(userId);
 
     return "OK";
   }
