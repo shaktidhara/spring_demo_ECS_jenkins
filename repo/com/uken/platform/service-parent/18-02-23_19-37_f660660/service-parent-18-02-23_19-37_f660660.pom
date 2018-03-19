@@ -46,6 +46,8 @@
             <groupId>com.uken.platform</groupId>
             <artifactId>metrics</artifactId>
             <version>18-02-23_19-32_f8c6f74</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/repo/com/uken/platform/metrics/18-02-23_19-32_f8c6f74/metrics-18-02-23_19-32_f8c6f74.jar</systemPath>
         </dependency>
     </dependencies>
 

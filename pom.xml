@@ -11,18 +11,19 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 
-	<repositories>
-		<repository>
-			<id>data-local</id>
-			<name>data</name>
-			<url>file:///${basedir}/repo</url>
-		</repository>
-	</repositories>
+	<!--<repositories>-->
+		<!--<repository>-->
+			<!--<id>data-local</id>-->
+			<!--<name>data</name>-->
+			<!--<url>file:///${basedir}/repo</url>-->
+		<!--</repository>-->
+	<!--</repositories>-->
 
 	<parent>
 		<groupId>com.uken.platform</groupId>
 		<artifactId>service-parent</artifactId>
 		<version>18-02-23_19-37_f660660</version>
+        <relativePath>./repo/com/uken/platform/service-parent/18-02-23_19-37_f660660/service-parent-18-02-23_19-37_f660660.pom</relativePath>
 	</parent>
 
 	<dependencies>
