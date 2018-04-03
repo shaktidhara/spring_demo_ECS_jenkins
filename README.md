@@ -25,7 +25,9 @@ Run the application with:
 docker-compose up
 ```
 
-This will start the application, spin up a database and redis instance, run migrations, and start the web server. Once it's all up you should be able to visit [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). See some `curl` examples below if you're inclined to run the code in this project. 
+If you are rebuilding your application and need a new docker image made, then run `docker build -t <your-image-name> .`.
+
+This will start the application, spin up a database and redis instance, run migrations, and start the web server. Once it's all up you should be able to visit [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). See some `curl` examples below if you're inclined to run the code in this project.
 
 
 ## Database Migrations
@@ -40,7 +42,7 @@ mvn flyway:migrate
 
 ## Testing
 
-The following will run all unit and integration tests, as well as check the code formatter. You'll notice that the `pom.xml` sets up some resources like a MySQL equivalent in-memory database called H2, and a redis instance that will automatically start and stop when running integration tests. So long as you have maven installed, you should be able to run tests without any other dependencies. 
+The following will run all unit and integration tests, as well as check the code formatter. You'll notice that the `pom.xml` sets up some resources like a MySQL equivalent in-memory database called H2, and a redis instance that will automatically start and stop when running integration tests. So long as you have maven installed, you should be able to run tests without any other dependencies.
 
 ```shell
 mvn clean verify
@@ -52,7 +54,7 @@ We use swagger to programmatically document our APIs. While running the server, 
 
 ## Datadog
 
-We use Datadog for our APM and custom application metrics. You largely get these for free (along with a YourKit profiler agent, by the way) from our parent docker image. A number of JVM and application level metrics are produced via our metrics library witch is included in the parent pom that this project inherits from. An example of how to implement your own custom metrics is provided in the `ExampleRestController`.  
+We use Datadog for our APM and custom application metrics. You largely get these for free (along with a YourKit profiler agent, by the way) from our parent docker image. A number of JVM and application level metrics are produced via our metrics library witch is included in the parent pom that this project inherits from. An example of how to implement your own custom metrics is provided in the `ExampleRestController`.
 
 ## Code Formatting
 
