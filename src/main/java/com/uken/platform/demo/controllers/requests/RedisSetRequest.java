@@ -1,8 +1,12 @@
 package com.uken.platform.demo.controllers.requests;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class RedisSetRequest {
-  private String key;
-  private String value;
+
+  @NotEmpty private String key;
+
+  @NotEmpty private String value;
 
   public String getKey() {
     return key;

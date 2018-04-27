@@ -4,6 +4,7 @@ import com.uken.platform.demo.controllers.requests.RedisSetRequest;
 import com.uken.platform.demo.services.RedisService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class RedisController {
     consumes = MediaType.APPLICATION_JSON_VALUE
   )
   @ApiOperation(value = "set", notes = "sets a simple value in redis")
-  public String set(@RequestBody RedisSetRequest request) {
+  public String set(@Valid @RequestBody RedisSetRequest request) {
     redisService.set(request.getKey(), request.getValue());
     return "OK";
   }
