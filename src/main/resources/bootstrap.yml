@@ -4,6 +4,8 @@ spring:
       config:
         uri: http://plt-stg-cfg.ecs2.uken.int
 
+---
+
 spring:
   profiles: platform_staging
   cloud:
