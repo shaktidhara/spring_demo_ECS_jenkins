@@ -5,10 +5,12 @@ spring:
     url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC
     username: root
     password: ""
-    test-while-idle: true
-    validationQuery: SELECT 1
     driver-class-name: com.mysql.cj.jdbc.Driver
-    test-on-borrow: true
+    tomcat:
+      test-on-borrow: true
+      validationQuery: SELECT 1
+      test-while-idle: true
+      timeBetweenEvictionRunsMillis: 60000
   redis:
     host: localhost
     port: 6379
