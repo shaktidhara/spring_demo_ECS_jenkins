@@ -2,8 +2,9 @@ node {
   println "Building and deploying '${params.GIT_HASH}'"
 
   stage('Checkout') {
-    git 'git@github.com:uken/spring_demo.git'
-    sh "git checkout ${params.GIT_HASH}"
+    //git 'git@github.com:uken/spring_demo.git'
+    //sh "git checkout ${params.GIT_HASH}"
+    checkout(scm)
   }
 
   maven_version = sh(returnStdout: true, script: """
